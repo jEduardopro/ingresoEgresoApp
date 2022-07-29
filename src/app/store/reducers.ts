@@ -7,11 +7,11 @@ import * as auth from "./auth/auth.reducer";
 export interface AppState {
   ui: ui.State,
   auth: auth.State,
-  ingresosEgresos: ingresoEgreso.State
+  // ingresosEgresos: ingresoEgreso.State
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   ui: ui.uiReducer,
   auth: auth.authReducer,
-  ingresosEgresos: ingresoEgreso.ingresoEgresoReducer
+  // ingresosEgresos: ingresoEgreso.ingresoEgresoReducer
 }
