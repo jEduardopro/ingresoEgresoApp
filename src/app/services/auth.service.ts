@@ -1,3 +1,4 @@
+import * as ingresoEgresoActions from './../store/ingresoEgreso/ingreso-egreso.actions';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
@@ -22,23 +23,24 @@ export class AuthService {
 
   initAuthListener() {
     this.auth.authState.subscribe((fUser) => {
-      console.log({fUser});
+      // console.log({fUser});
       if (fUser) {
         this.userSubs = this.firestore.doc(`${fUser.uid}/usuario`).valueChanges()
           .subscribe((firestoreUser: any) => {
-            console.log({firestoreUser});
+            // console.log({firestoreUser});
 
             const user = User.fromFirebase(firestoreUser)
-            this.store.dispatch(authActions.setUser({user}))
+            this.store.dispatch(authActions.setUser({ user }))
           })
 
       } else {
         if (this.userSubs) {
-          console.log('unsubscribe');
+          // console.log('unsubscribe');
 
           this.userSubs.unsubscribe();
         }
-        this.store.dispatch(authActions.setUser({user:null}))
+        this.store.dispatch(authActions.setUser({ user: null }))
+        this.store.dispatch(ingresoEgresoActions.setItems({ items: [] }));
       }
     })
   }
